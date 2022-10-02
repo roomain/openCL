@@ -2,10 +2,22 @@
 //
 
 #include <iostream>
-#include "CL/cl.h"
+#include "CL/opencl.hpp"
+#include <vector>
 
 int main()
 {
+    std::vector<cl::Platform> platforms;
+    cl::Platform::get(&platforms);
+    for (auto& platform : platforms)
+    {
+        std::cout << "NAME: " << platform.getInfo<CL_PLATFORM_NAME>() << std::endl;
+        std::cout << "VERS: " << platform.getInfo<CL_PLATFORM_VERSION>() << std::endl;
+        std::cout << "VENDOR: " << platform.getInfo<CL_PLATFORM_VENDOR>() << std::endl;
+        std::cout << "EXT: " << platform.getInfo<CL_PLATFORM_EXTENSIONS>() << std::endl;
+    }
+
+
     std::cout << "Hello World!\n";
 }
 

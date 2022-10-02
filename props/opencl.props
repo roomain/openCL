@@ -4,23 +4,25 @@
   <Choose>
     <When Condition="exists('$(AMDAPPSDKROOT)') ">
       <PropertyGroup Label="UserMacros">
-        <OPENCL_INC>$(AMDAPPSDKROOT)include</OPENCL_INC>
-        <OPENCL_LIB>$(AMDAPPSDKROOT)lib\x86_64</OPENCL_LIB>
-        <OPENCL_BIN>$(AMDAPPSDKROOT)bin\x86_64</OPENCL_BIN>
+        <OPENCL_INC_HPP>D:\Libraries\OpenCL-SDK\external\OpenCL-CLHPP\include</OPENCL_INC_HPP>
+        <OPENCL_INC>D:\Libraries\OpenCL-SDK\external\OpenCL-Headers</OPENCL_INC>
+        <OPENCL_LIB>D:\Libraries\OpenCL-SDK\install\lib</OPENCL_LIB>
+        <OPENCL_BIN>D:\Libraries\OpenCL-SDK\install\bin</OPENCL_BIN>
       </PropertyGroup>
     </When>
     <When Condition="NOT exists('$(AMDAPPSDKROOT)') ">
       <PropertyGroup Label="UserMacros">
-        <OPENCL_INC>$(AMDAPPSDKROOT)include</OPENCL_INC>
-        <OPENCL_LIB>$(AMDAPPSDKROOT)lib\x86_64</OPENCL_LIB>
-        <OPENCL_BIN>$(AMDAPPSDKROOT)bin\x86_64</OPENCL_BIN>
+        <OPENCL_INC_HPP>C:\Libraries\OpenCL-SDK\external\OpenCL-CLHPP\include</OPENCL_INC_HPP>
+        <OPENCL_INC>C:\Libraries\OpenCL-SDK\external\OpenCL-Headers</OPENCL_INC>
+        <OPENCL_LIB>C:\Libraries\OpenCL-SDK\install\lib</OPENCL_LIB>
+        <OPENCL_BIN>C:\Libraries\OpenCL-SDK\install\bin</OPENCL_BIN>
       </PropertyGroup>
     </When>
   </Choose>
   <PropertyGroup />
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(OPENCL_INC);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(OPENCL_INC_HPP);$(OPENCL_INC);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(OPENCL_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -31,6 +33,9 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <BuildMacro Include="OPENCL_INC_HPP">
+      <Value>$(OPENCL_INC_HPP)</Value>
+    </BuildMacro>
     <BuildMacro Include="OPENCL_INC">
       <Value>$(OPENCL_INC)</Value>
     </BuildMacro>
