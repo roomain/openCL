@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <Choose>
+    <When Condition="exists('$(AMDAPPSDKROOT)') ">
+      <PropertyGroup Label="UserMacros">
+        <OPENCL_INC>$(AMDAPPSDKROOT)include</OPENCL_INC>
+        <OPENCL_LIB>$(AMDAPPSDKROOT)lib\x86_64</OPENCL_LIB>
+        <OPENCL_BIN>$(AMDAPPSDKROOT)bin\x86_64</OPENCL_BIN>
+      </PropertyGroup>
+    </When>
+    <When Condition="NOT exists('$(AMDAPPSDKROOT)') ">
+      <PropertyGroup Label="UserMacros">
+        <OPENCL_INC>$(AMDAPPSDKROOT)include</OPENCL_INC>
+        <OPENCL_LIB>$(AMDAPPSDKROOT)lib\x86_64</OPENCL_LIB>
+        <OPENCL_BIN>$(AMDAPPSDKROOT)bin\x86_64</OPENCL_BIN>
+      </PropertyGroup>
+    </When>
+  </Choose>
+  <PropertyGroup />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(OPENCL_INC);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(OPENCL_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OpenCL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy /Y "$(OPENCL_BIN)\OpenCL.dll" $(OutDir)</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <BuildMacro Include="OPENCL_INC">
+      <Value>$(OPENCL_INC)</Value>
+    </BuildMacro>
+    <BuildMacro Include="OPENCL_LIB">
+      <Value>$(OPENCL_LIB)</Value>
+    </BuildMacro>
+    <BuildMacro Include="OPENCL_BIN">
+      <Value>$(OPENCL_BIN)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>
