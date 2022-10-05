@@ -2,15 +2,13 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
-        <OPENCL_INC_HPP Condition="exists('$(AMDAPPSDKROOT)') ">D:\Libraries\OpenCL-SDK\external\OpenCL-CLHPP\include</OPENCL_INC_HPP>
-        <OPENCL_INC_HPP Condition="!exists('$(AMDAPPSDKROOT)') ">C:\libraries\OpenCL-SDK\external\OpenCL-CLHPP\include</OPENCL_INC_HPP>
-        <OPENCL_INC  Condition="exists('$(AMDAPPSDKROOT)') ">D:\Libraries\OpenCL-SDK\external\OpenCL-Headers</OPENCL_INC>
-        <OPENCL_INC Condition="!exists('$(AMDAPPSDKROOT)') ">C:\libraries\OpenCL-SDK\external\OpenCL-Headers</OPENCL_INC>
-        <OPENCL_LIB Condition="exists('$(AMDAPPSDKROOT)') ">D:\Libraries\OpenCL-SDK\install\lib</OPENCL_LIB>
-        <OPENCL_LIB Condition="!exists('$(AMDAPPSDKROOT)') ">C:\libraries\OpenCL-SDK\install\lib</OPENCL_LIB>
-        <OPENCL_BIN Condition="exists('$(AMDAPPSDKROOT)') ">D:\Libraries\OpenCL-SDK\install\bin</OPENCL_BIN>
-        <OPENCL_BIN Condition="!exists('$(AMDAPPSDKROOT)') ">C:\libraries\OpenCL-SDK\install\bin</OPENCL_BIN>
-      </PropertyGroup>
+        <OPENCL_DIR Condition="exists('$(AMDAPPSDKROOT)')">D:\Libraries\OpenCL-SDK</OPENCL_DIR>
+        <OPENCL_DIR Condition="!exists('$(AMDAPPSDKROOT)')">C:\librairies\OpenCL-SDK</OPENCL_DIR>
+        <OPENCL_INC_HPP>$(OPENCL_DIR)\external\OpenCL-CLHPP\include</OPENCL_INC_HPP>
+        <OPENCL_INC>$(OPENCL_DIR)\external\OpenCL-Headers</OPENCL_INC>
+        <OPENCL_LIB>$(OPENCL_DIR)\install\lib</OPENCL_LIB>
+        <OPENCL_BIN>$(OPENCL_DIR)\install\bin</OPENCL_BIN>
+  </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalIncludeDirectories>$(OPENCL_INC_HPP);$(OPENCL_INC);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -24,6 +22,9 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <BuildMacro Include="OPENCL_DIR">
+      <Value>$(OPENCL_DIR)</Value>
+    </BuildMacro>
     <BuildMacro Include="OPENCL_INC_HPP">
       <Value>$(OPENCL_INC_HPP)</Value>
     </BuildMacro>
