@@ -1,25 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
-  <Choose>
-    <When Condition="exists('$(AMDAPPSDKROOT)') ">
-      <PropertyGroup Label="UserMacros">
-        <OPENCL_INC_HPP>D:\Libraries\OpenCL-SDK\external\OpenCL-CLHPP\include</OPENCL_INC_HPP>
-        <OPENCL_INC>D:\Libraries\OpenCL-SDK\external\OpenCL-Headers</OPENCL_INC>
-        <OPENCL_LIB>D:\Libraries\OpenCL-SDK\install\lib</OPENCL_LIB>
-        <OPENCL_BIN>D:\Libraries\OpenCL-SDK\install\bin</OPENCL_BIN>
+  <PropertyGroup Label="UserMacros">
+        <OPENCL_INC_HPP Condition="exists('$(AMDAPPSDKROOT)') ">D:\Libraries\OpenCL-SDK\external\OpenCL-CLHPP\include</OPENCL_INC_HPP>
+        <OPENCL_INC_HPP Condition="!exists('$(AMDAPPSDKROOT)') ">C:\libraries\OpenCL-SDK\external\OpenCL-CLHPP\include</OPENCL_INC_HPP>
+        <OPENCL_INC  Condition="exists('$(AMDAPPSDKROOT)') ">D:\Libraries\OpenCL-SDK\external\OpenCL-Headers</OPENCL_INC>
+        <OPENCL_INC Condition="!exists('$(AMDAPPSDKROOT)') ">C:\libraries\OpenCL-SDK\external\OpenCL-Headers</OPENCL_INC>
+        <OPENCL_LIB Condition="exists('$(AMDAPPSDKROOT)') ">D:\Libraries\OpenCL-SDK\install\lib</OPENCL_LIB>
+        <OPENCL_LIB Condition="!exists('$(AMDAPPSDKROOT)') ">C:\libraries\OpenCL-SDK\install\lib</OPENCL_LIB>
+        <OPENCL_BIN Condition="exists('$(AMDAPPSDKROOT)') ">D:\Libraries\OpenCL-SDK\install\bin</OPENCL_BIN>
+        <OPENCL_BIN Condition="!exists('$(AMDAPPSDKROOT)') ">C:\libraries\OpenCL-SDK\install\bin</OPENCL_BIN>
       </PropertyGroup>
-    </When>
-    <When Condition="NOT exists('$(AMDAPPSDKROOT)') ">
-      <PropertyGroup Label="UserMacros">
-        <OPENCL_INC_HPP>C:\Libraries\OpenCL-SDK\external\OpenCL-CLHPP\include</OPENCL_INC_HPP>
-        <OPENCL_INC>C:\Libraries\OpenCL-SDK\external\OpenCL-Headers</OPENCL_INC>
-        <OPENCL_LIB>C:\Libraries\OpenCL-SDK\install\lib</OPENCL_LIB>
-        <OPENCL_BIN>C:\Libraries\OpenCL-SDK\install\bin</OPENCL_BIN>
-      </PropertyGroup>
-    </When>
-  </Choose>
-  <PropertyGroup />
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalIncludeDirectories>$(OPENCL_INC_HPP);$(OPENCL_INC);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
