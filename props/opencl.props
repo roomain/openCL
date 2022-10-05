@@ -3,7 +3,7 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
         <OPENCL_DIR Condition="exists('D:\Libraries\OpenCL-SDK')">D:\Libraries\OpenCL-SDK</OPENCL_DIR>
-        <OPENCL_DIR Condition="exists('C:\librairies\OpenCL-SDK')">C:\librairies\OpenCL-SDK</OPENCL_DIR>
+        <OPENCL_DIR Condition="exists('C:\libraries\OpenCL-SDK')">C:\libraries\OpenCL-SDK</OPENCL_DIR>
         <OPENCL_INC_HPP>$(OPENCL_DIR)\external\OpenCL-CLHPP\include</OPENCL_INC_HPP>
         <OPENCL_INC>$(OPENCL_DIR)\external\OpenCL-Headers</OPENCL_INC>
         <OPENCL_LIB>$(OPENCL_DIR)\install\lib</OPENCL_LIB>
